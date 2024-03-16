@@ -1,5 +1,5 @@
-export const draw = (deck, drawed, turn, playerBoards, 
-		setDrawed, setDeck, setPlayerBoards,setBurstComment, setStealComment, setStealCard) => {
+export const draw = (playerName, deck, drawed, turn, playerBoards, 
+		setDrawed, setDeck, setPlayerBoards, setBurstComment, setStealComment, setStealCard) => {
 	
 	let playerBoardsOrta = [];
 	playerBoards.map((playerBoard, i) => {
@@ -28,7 +28,7 @@ export const draw = (deck, drawed, turn, playerBoards,
 	if (playerBoards[turn].length >= 3 && playerBoards[turn].includes(card)) {
 		// console.log(playerBoardsOrta);
 		stealFlag = false;
-		burstAnnounce(turn, setBurstComment, card);
+		burstAnnounce(playerName, turn, setBurstComment, card);
 	}
 
 	//playerBoardsから、playerBoards[turn]を削除して、それ以外を一次の配列にする
@@ -124,7 +124,7 @@ const playerBoardsSum = (nextTurn, playerBoards, points, setPlayerBoards, setPoi
 	setPoints(pointsOrta);
 }
 
-export const finish = (playerBoards, points, players, drawed, turn, setPlayerBoards, setPoints, setResult) => {
+export const finish = (playerName, playerBoards, points, players, drawed, turn, setPlayerBoards, setPoints, setResult) => {
 	let pointsOrta = points.slice();
 	let playerBoardsOrta = [];
 
@@ -174,7 +174,7 @@ export const finish = (playerBoards, points, players, drawed, turn, setPlayerBoa
 
 	let resultSentence;
 	index_max.map((winner, i) => {
-		index_max[i] = "プレイヤー" + winner
+		index_max[i] = playerName[winner];
 	})	
 	resultSentence = index_max.join(",") + "の勝利です。"
 
@@ -185,7 +185,7 @@ export const finish = (playerBoards, points, players, drawed, turn, setPlayerBoa
 //バースト
 //ドローしたカードと同じカードが既にplayerBoardsに存在する場合にplayerBoards[turn]を空にする
 */
-export const burst = (turn, players, playerBoards, points, drawed, setPlayerBoards, setPoints, setTurn, setBurstComment, setDrawed) => {
+export const burst = (playerName, turn, players, playerBoards, points, drawed, setPlayerBoards, setPoints, setTurn, setBurstComment, setDrawed) => {
 	console.log(playerBoards);
 	let playerBoardsOrta = [];
 	playerBoards.map((playerBoard, i) => {
@@ -205,8 +205,8 @@ export const burst = (turn, players, playerBoards, points, drawed, setPlayerBoar
 	changeTurn(turn, players, playerBoardsOrta, points, drawedOrta, setDrawed, setPlayerBoards, setPoints, setTurn);
 }
 
-const burstAnnounce = (turn, setBurstComment, card) => {
-	setBurstComment(`プレイヤー${turn}はバーストしました。引いたカード：${card}`);
+const burstAnnounce = (playerName, turn, setBurstComment, card) => {
+	setBurstComment(`${playerName[turn]}はバーストしました。引いたカード：${card}`);
 }
 
 export const steal = (turn, playerBoards, stealCard, setPlayerBoards, setStealComment, setStealCard) => {
@@ -242,4 +242,16 @@ export const steal = (turn, playerBoards, stealCard, setPlayerBoards, setStealCo
 	setPlayerBoards(playerBoardsOrta2);
 	setStealComment('');
 	setStealCard(0);
+}
+
+export const countDrawed = (playerBoard, num) => {
+	let count = 0;
+	
+	for (let card of playerBoard) {
+		if (num === card) {
+		 count++;
+		}
+	}
+
+	return '×' + count;
 }
