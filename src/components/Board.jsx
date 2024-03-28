@@ -1,7 +1,16 @@
 import { useState, useEffect } from "react";
 import { makeDeck } from "../logic/InitLogic";
 import { draw, changeTurn, burst, steal, finish, countDrawed} from "../logic/Logic";
-import MyButton from "./MyButton";
+import Total from "./Total";
+import DrawedsContainer from "./DrawedsContainer";
+import DrawField from "./DrawField";
+import PlayerName from "./PlayerName";
+import Result from "./Result";
+import Finish from "./Finish";
+import StealComment from "./StealComment";
+import BurstComment from "./BurstComment";
+import ChangeTurnButton from "./ChangeTurnButton";
+import Deck from "./Deck";
 
 const Board = ({players, playerName}) => {
 
@@ -46,181 +55,94 @@ const Board = ({players, playerName}) => {
 		<>
 			<div className='information'>
 				{!burstComment && !stealComment && !gameset &&
-					<button onClick={() => 
-					draw(playerName, deck, drawed, turn, playerBoards, setDrawed, setDeck, setPlayerBoards, setBurstComment, setStealComment, setStealCard)}>ドロー</button>
+					<button onClick={() => draw(playerName, deck, drawed, turn, playerBoards, setDrawed, setDeck, setPlayerBoards, setBurstComment, setStealComment, setStealCard)}>
+						ドロー
+					</button>
 				}
 				{!burstComment && !stealComment && !gameset &&
-					<button onClick={() => {
-						changeTurn(turn, players, playerBoards, points, drawed, setDrawed, setPlayerBoards, setPoints, setTurn);
-					}}>ターン変更</button>
+					<ChangeTurnButton 
+						changeTurn={changeTurn} 
+						turn={turn} 
+						players={players} 
+						playerBoards={playerBoards} 
+						points={points} 
+						drawed={drawed} 
+						setDrawed={setDrawed} 
+						setPlayerBoards={setPlayerBoards} 
+						setPoints={setPoints} 
+						setTurn={setTurn}
+					/>
 				}
 				{burstComment &&
-					<>
-						<button className='burst-button' onClick={() => burst(playerName, turn, players, playerBoards, points, drawed, setPlayerBoards, setPoints, setTurn, setBurstComment, setDrawed)}>OK</button>
-						<div className='burst-comment'>{burstComment}</div>
-					</>
+					<BurstComment 
+						burst={burst} 
+						playerName={playerName} 
+						turn={turn} 
+						players={players} 
+						playerBoards={playerBoards} 
+						points={points} 
+						drawed={drawed} 
+						setPlayerBoards={setPlayerBoards} 
+						setPoints={setPoints} 
+						setTurn={setTurn} 
+						setBurstComment={setBurstComment} 
+						setDrawed={setDrawed} 
+						burstComment={burstComment}
+					/>
 				}
 				{stealComment &&
-					<>
-						<div className='stealComment'>{stealComment}</div>
-						<button onClick={() => steal(turn, playerBoards, stealCard, setPlayerBoards, setStealComment, setStealCard)}>はい</button>
-						<button onClick={() => setStealComment("")}>いいえ</button>
-					</>
+					<StealComment 
+						stealComment={stealComment} 
+						steal={steal} 
+						turn={turn} 
+						playerBoards={playerBoards} 
+						stealCard={stealCard} 
+						setPlayerBoards={setPlayerBoards} 
+						setStealComment={setStealComment} 
+						setStealCard={setStealCard}
+					/>
 				}
 				{gameset && !burstComment && !stealComment && !result &&
-					<>
-						<button onClick={() => finish(playerName, playerBoards, points, players, drawed, turn, setPlayerBoards, setPoints, setResult)}>集計</button>
-					</>
+					<Finish 
+						finish={finish} 
+						playerName={playerName} 
+						playerBoards={playerBoards} 
+						points={points}
+						players={players} 
+						drawed={drawed} 
+						turn={turn} 
+						setPlayerBoards={setPlayerBoards} 
+						setPoints={setPoints} 
+						setResult={setResult}
+					/>
 				}
 				{result &&
-					<>
-						<div>{result}</div>
-						<div></div>
-					</>
+					<Result result={result} />
 				}
-			</div>
+				</div>
 			<div className="board">
-				<div>デッキ枚数：{deck.length}</div>
+				<Deck deck={deck} />
 				{playerBoards.map((playerBoard, index) => {
-					return (
-					<div className='player-board' key={index}>
-						<div className="player-name">{playerName[index]}</div>
-						<div className="card-field">
-							<div className='draw-field'>
-								{drawed[index] !== 0 &&
-									(
-									<div className={'draw card-' + drawed[index]}>
-									</div>
-									)
-								}
+					 return (
+						<div className='player-board' key={index}>
+							<PlayerName playerName={playerName} index={index} turn={turn} />
+							<div className="card-field">
+								<DrawField drawed={drawed} index={index}/>
+								<div className='drawed-cards-container'>
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={1} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={2} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={3} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={4} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={5} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={6} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={7} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={8} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={9} />
+									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={10} />
+								</div>
 							</div>
-							<div className='drawed-cards-container'>
-								{playerBoard.includes(1) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-1 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 1)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(2) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-2 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 2)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(3) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-3 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 3)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(4) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-4 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 4)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(5) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-5 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 5)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(6) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-6 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 6)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(7) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-7 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 7)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(8) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-8 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 8)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(9) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-9 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 9)
-													}
-											</div>
-										</div>
-									)
-								}
-								{playerBoard.includes(10) &&
-									(
-										<div className='draweds-container'>
-											<div className='card-10 drawed-cards' />
-												<div className='card-count'>
-													{
-														countDrawed(playerBoard, 10)
-													}
-											</div>
-										</div>
-									)
-								}
-							</div>
+							<Total points={points} index={index} />
 						</div>
-						<div className='total'>
-							合計：{points[index]}
-						</div>
-					</div>
 					)
 				})}
 			</div>

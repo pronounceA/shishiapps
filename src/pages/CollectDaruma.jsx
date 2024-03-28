@@ -3,7 +3,7 @@ import Start from '../components/Start'
 import Board from '../components/Board'
 
 const CollectDaruma = () => {
-	const [players, setPlayers] = useState(1);
+	const [players, setPlayers] = useState(2);
 	const [playerName, setPlayerName] = useState([]);
 	const [gameFlag, setGameFlag] = useState(false);
 

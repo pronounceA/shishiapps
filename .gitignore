@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/src/components/ow2
+/src/components/constants
+/src/photos/ow2
+/src/pages/OverWatch.jsx

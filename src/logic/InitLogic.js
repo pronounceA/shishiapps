@@ -17,8 +17,7 @@ export const makeDeck = (setDeck) => {
 		}
 	}
 
-	// setDeck(shuffle(deckInit));
-	setDeck([1,1,1,2,3]);
+	setDeck(shuffle(deckInit));
 }
 
 /*

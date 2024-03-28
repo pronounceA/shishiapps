@@ -2,10 +2,18 @@ import { useState, useEffect } from 'react'
 import MyButton from './MyButton'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import Modal from 'react-bootstrap/Modal';
+import { Button } from 'react-bootstrap';
 
 const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) => {
 
 	const [nameBrank, setNameBrank] = useState("");
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 	const changePlayers = (players) => {
 		setPlayers(players);
@@ -44,38 +52,59 @@ const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) =>
 	}, [players])
 
 	return (
-		<div>
-			{nameBrank &&
-				(
-					<Alert variant="danger">
-						{nameBrank}
-					</Alert>
-				)
-			}
-			<div className="player-num">
-				<div>プレイヤー数：</div>
+		<>
+			<div className='start-detail'>
+				{nameBrank &&
+					(
+						<Alert variant="danger">
+							{nameBrank}
+						</Alert>
+					)
+				}
+				<div className="player-num">
+					<div>プレイヤー数：</div>
+					<div>
+						<select onChange={(e) => changePlayers(e.target.value)}>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+					</div>
+				</div>
+				<div className="players-name">
+					{playerName.map((name, i) => {
+						return(
+							<div className="player">
+								<div>
+									プレイヤー{i + 1}：
+								</div>
+								<input type="text" id={i} onChange={(e) => changedName(e.target.id, e.target.value)}/>
+							</div>
+						)
+					})}
+				</div>
+				<MyButton logic={gameStart} cn={'start'}>スタート</MyButton>
 				<div>
-					<select onChange={(e) => changePlayers(e.target.value)}>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-					</select>
+					<FontAwesomeIcon icon={faCaretRight} />
+					<button className='rule-button' onClick={handleShow}>ルール</button>
 				</div>
 			</div>
-			<div className="players-name">
-				{playerName.map((name, i) => {
-					return(
-						<div className="player">
-							<div>
-								プレイヤー{i + 1}：
-							</div>
-							<input type="text" id={i} onChange={(e) => changedName(e.target.id, e.target.value)}/>
-						</div>
-					)
-				})}
-			</div>
-			<MyButton logic={gameStart}>スタート</MyButton>
-		</div>
+
+			<Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+		</>
 	)
 }
 

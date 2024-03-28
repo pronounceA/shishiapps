@@ -2,8 +2,8 @@ import React from 'react'
 
 const Delete = () => {
 	window.location.replace(
-		//"https://shishiapps.net"
-		"http://localhost:3000"
+		"https://shishiapps.net"
+		//"http://localhost:3000"
 	);
 
 	return (
