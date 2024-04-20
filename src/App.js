@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import TicTacToe from './pages/TicTacToe';
-import B from './pages/B';
-import C from './pages/C';
 import Delete from './pages/Delete';
-import Home from './components/Home';
+import Home from './pages/Home';
 import OverWatch from './pages/OverWatch';
 import CollectDaruma from './pages/CollectDaruma';
 
@@ -18,6 +16,7 @@ function App() {
     <>
       <div className="App">
         <head>
+          <title>shishi apps</title>
         </head>
         <header className="App-header">
           
@@ -32,21 +31,17 @@ function App() {
           <li className='menu-list' onClick={() => setOpen(false)}><Link to="/">home</Link></li>
           <li className='menu-list' onClick={() => setOpen(false)}><Link to="/TicTacToe">TicTacToe</Link></li>
           <li className='menu-list' onClick={() => setOpen(false)}><Link to="/CollectDaruma">だるまあつめ</Link></li>
-          <li className='menu-list' onClick={() => setOpen(false)}><Link to="/B">B</Link></li>
-          <li className='menu-list' onClick={() => setOpen(false)}><Link to="/C">C</Link></li>
-          {/* <li className='menu-list' onClick={() => setOpen(false)}><Link to="/Delete">Delete</Link></li> */}
         </ul>
       </div>
-      
-      <Routes>
-        <Route exact path="/" element={ <Home />} />
-        <Route exact path="/TicTacToe" element={ <TicTacToe /> } /> 
-        <Route exact path="/B" element={ <B /> } />
-        <Route exact path="/C" element={ <C /> } />
-        <Route exact path="/CollectDaruma" element={ <CollectDaruma />} />
-        <Route exact path="/ow2" element={ <OverWatch />}></Route>
-        <Route path="*" element={<Delete />} />
-      </Routes>
+      <div className='pages'>
+        <Routes>
+          <Route exact path="/" element={ <Home />} />
+          <Route exact path="/TicTacToe" element={ <TicTacToe /> } /> 
+          <Route exact path="/CollectDaruma" element={ <CollectDaruma />} />
+          <Route exact path="/ow2" element={ <OverWatch />}></Route>
+          <Route path="*" element={<Delete />} />
+        </Routes>
+      </div>
     </>
   );
 }
