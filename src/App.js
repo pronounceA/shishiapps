@@ -15,23 +15,19 @@ function App() {
   return (
     <>
       <div className="App">
-        <head>
-          <title>shishi apps</title>
-        </head>
         <header className="App-header">
-          
+          <div className='left'></div>
+          <button class="hamburger" onClick={() => setOpen(!isOpen)}>
+            <span class="hamburger_bar"></span>
+            <span class="hamburger_bar"></span>
+            <span class="hamburger_bar"></span>
+          </button>
+          <ul className={isOpen ? 'hamburger-menu open' : 'hamburger-menu'}>
+            <li className='menu-list' onClick={() => setOpen(false)}><Link to="/">home</Link></li>
+            <li className='menu-list' onClick={() => setOpen(false)}><Link to="/TicTacToe">TicTacToe</Link></li>
+            <li className='menu-list' onClick={() => setOpen(false)}><Link to="/CollectDaruma">だるまあつめ</Link></li>
+          </ul>
         </header>
-        <div className='left'></div>
-        <button class="hamburger" onClick={() => setOpen(!isOpen)}>
-          <span class="hamburger_bar"></span>
-          <span class="hamburger_bar"></span>
-          <span class="hamburger_bar"></span>
-        </button>
-        <ul className={isOpen ? 'hamburger-menu open' : 'hamburger-menu'}>
-          <li className='menu-list' onClick={() => setOpen(false)}><Link to="/">home</Link></li>
-          <li className='menu-list' onClick={() => setOpen(false)}><Link to="/TicTacToe">TicTacToe</Link></li>
-          <li className='menu-list' onClick={() => setOpen(false)}><Link to="/CollectDaruma">だるまあつめ</Link></li>
-        </ul>
       </div>
       <div className='pages'>
         <Routes>
