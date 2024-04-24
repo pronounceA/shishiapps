@@ -7,6 +7,9 @@ const CollectDaruma = () => {
 	const [playerName, setPlayerName] = useState([]);
 	const [gameFlag, setGameFlag] = useState(false);
 
+/*
+/
+*/
 	return (
 		<div>
 			{gameFlag ? 
