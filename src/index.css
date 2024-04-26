@@ -383,12 +383,12 @@ ul {
   margin-top: 10px;
 }
 
-.start-button {
-  margin-top: 10px;
-}
-
 .rule-button {
-  margin-top: 10px;
+  border: none;
+  background-color: #fff;
+  color: blue;
+  text-decoration: underline;
+  margin: 10px 0 0 0;
 }
 
 .pick-table {
@@ -510,4 +510,3 @@ button.role-name{
 .home-list {
   list-style: circle;
 }
-
