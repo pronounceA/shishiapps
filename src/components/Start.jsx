@@ -9,7 +9,7 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
 
-const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) => {
+const Start = ({ setPlayers, setGameFlag, players, playerName, setPlayerName }) => {
 
 	const [nameBrank, setNameBrank] = useState("");
 	const [show, setShow] = useState(false);
@@ -75,12 +75,12 @@ const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) =>
 				</div>
 				<div className="players-name">
 					{playerName.map((name, i) => {
-						return(
+						return (
 							<div className="player">
 								<div>
 									プレイヤー{i + 1}：
 								</div>
-								<input type="text" id={i} onChange={(e) => changedName(e.target.id, e.target.value)}/>
+								<input type="text" id={i} onChange={(e) => changedName(e.target.id, e.target.value)} />
 							</div>
 						)
 					})}
@@ -93,10 +93,10 @@ const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) =>
 			</div>
 
 			<Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>ルール</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+				<Modal.Header closeButton>
+					<Modal.Title>ルール</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
 					手番が来たら、山札からカードを一枚引くか、手番を終えるかを選びます。<br />
 					カードは1～10でその数字がそのまま得点となります。同じ数字の枚数が多ければそれだけ点数が増えることになります。<br />
 					山札は1~5のカードが13枚、6~10のカードが9枚で、合計110枚あります。<br />
@@ -115,12 +115,12 @@ const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) =>
 					山札の最後のカードが引かれ、その手番を終えたらゲーム終了です。<br />
 					各自「予約カード」を裏向きにして、獲得したすべてのカードを合計します。点数が高い人が勝ちです。<br />
 				</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleClose}>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 	)
 }

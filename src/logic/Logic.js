@@ -1,6 +1,6 @@
-export const draw = (playerName, deck, drawed, turn, playerBoards, 
-		setDrawed, setDeck, setPlayerBoards, setBurstComment, setStealComment, setStealCard) => {
-	
+export const draw = (playerName, deck, drawed, turn, playerBoards,
+	setDrawed, setDeck, setPlayerBoards, setBurstComment, setStealComment, setStealCard) => {
+
 	let playerBoardsOrta = [];
 	playerBoards.map((playerBoard, i) => {
 		playerBoardsOrta[i] = playerBoard;
@@ -34,7 +34,7 @@ export const draw = (playerName, deck, drawed, turn, playerBoards,
 	//playerBoardsから、playerBoards[turn]を削除して、それ以外を一次の配列にする
 	let playerBoardsOrta2 = [];
 	playerBoards.map((playerBoard, i) => {
-		if(i !== turn) playerBoardsOrta2[i] = playerBoard;
+		if (i !== turn) playerBoardsOrta2[i] = playerBoard;
 	})
 	playerBoardsOrta2 = playerBoardsOrta2.flat(Infinity);
 
@@ -52,10 +52,10 @@ export const draw = (playerName, deck, drawed, turn, playerBoards,
 	setDeck(deckOrta);
 }
 
-	/*
-	// ターン変更
-	// ターン上限(プレイヤー数 - 1)に到達した場合、0に戻す
-	*/
+/*
+// ターン変更
+// ターン上限(プレイヤー数 - 1)に到達した場合、0に戻す
+*/
 export const changeTurn = (prevTurn, players, playerBoards, points, drawed, setDrawed, setPlayerBoards, setPoints, setTurn) => {
 	let drawedOrta = drawed.slice();
 	// console.log(drawedOrta[0]);
@@ -74,7 +74,7 @@ export const changeTurn = (prevTurn, players, playerBoards, points, drawed, setD
 	// console.log(playerBoardsOrta[0]);
 	// console.log(playerBoardsOrta[1]);
 
-	if(drawedOrta[prevTurn] !== 0) {
+	if (drawedOrta[prevTurn] !== 0) {
 		// console.log(playerBoardsOrta[prevTurn]);
 		// console.log(drawedOrta[prevTurn]);
 		playerBoardsOrta[prevTurn].push(drawedOrta[prevTurn]);
@@ -91,7 +91,7 @@ export const changeTurn = (prevTurn, players, playerBoards, points, drawed, setD
 	// console.log(drawedOrta);
 	setDrawed(drawedOrta);
 	setPlayerBoards(playerBoardsOrta);
-	
+
 	let nextTurn = 0;
 	if (prevTurn === (players - 1)) {
 		setTurn(nextTurn);
@@ -117,9 +117,9 @@ const playerBoardsSum = (nextTurn, playerBoards, points, setPlayerBoards, setPoi
 	pointsOrta[nextTurn] = playerBoards[nextTurn].reduce((sum, point) => {
 		return sum + point;
 	}, pointsOrta[nextTurn])
-	
+
 	playerBoardsOrta[nextTurn] = [];
-	
+
 	setPlayerBoards(playerBoardsOrta);
 	setPoints(pointsOrta);
 }
@@ -140,10 +140,10 @@ export const finish = (playerName, playerBoards, points, players, drawed, turn, 
 	// console.log(playerBoards[1]);
 
 	playerBoards.forEach((playerBoard, i) => {
-		if(playerBoard.length !== 0) {
-			playerBoard.forEach((card, j) =>{
+		if (playerBoard.length !== 0) {
+			playerBoard.forEach((card, j) => {
 				pointsOrta[i] += card;
-			}) 
+			})
 		}
 	});
 
@@ -163,7 +163,7 @@ export const finish = (playerName, playerBoards, points, players, drawed, turn, 
 
 
 
-	while(index !== -1 && i < 5) {
+	while (index !== -1 && i < 5) {
 		index_max.push(index);
 		pointsOrta2[index] = 0;
 		index = pointsOrta2.indexOf(max);
@@ -175,7 +175,7 @@ export const finish = (playerName, playerBoards, points, players, drawed, turn, 
 	let resultSentence;
 	index_max.map((winner, i) => {
 		index_max[i] = playerName[winner];
-	})	
+	})
 	resultSentence = index_max.join(",") + "の勝利です。"
 
 	setResult(resultSentence);
@@ -246,10 +246,10 @@ export const steal = (turn, playerBoards, stealCard, setPlayerBoards, setStealCo
 
 export const countDrawed = (playerBoard, num) => {
 	let count = 0;
-	
+
 	for (let card of playerBoard) {
 		if (num === card) {
-		 count++;
+			count++;
 		}
 	}
 
