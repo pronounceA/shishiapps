@@ -7,15 +7,15 @@ const CollectDaruma = () => {
 	const [playerName, setPlayerName] = useState([]);
 	const [gameFlag, setGameFlag] = useState(false);
 
-/*
-/
-*/
+	/*
+	/
+	*/
 	return (
 		<div>
-			{gameFlag ? 
-				<Board players={players} playerName={playerName}/> 
-			: 
-				<Start setPlayers={setPlayers} setGameFlag={setGameFlag} players={players} playerName={playerName} setPlayerName={setPlayerName}/>
+			{gameFlag ?
+				<Board players={players} playerName={playerName} />
+				:
+				<Start setPlayers={setPlayers} setGameFlag={setGameFlag} players={players} playerName={playerName} setPlayerName={setPlayerName} />
 			}
 		</div>
 	)

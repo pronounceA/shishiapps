@@ -10,9 +10,9 @@ export const makeDeck = (setDeck) => {
 	let deckInit = new Array();
 	let initCount;
 
-	for(let i = 1; i <= 10; i++) {
-		initCount = i <= 5 ? 13 : 9; 
-		for (let j = 0; j < initCount; j++) { 
+	for (let i = 1; i <= 10; i++) {
+		initCount = i <= 5 ? 13 : 9;
+		for (let j = 0; j < initCount; j++) {
 			deckInit.push(i);
 		}
 	}

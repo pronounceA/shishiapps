@@ -3,9 +3,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-  }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -35,6 +35,7 @@ code {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -113,6 +114,7 @@ body {
 .status {
   margin-bottom: 10px;
 }
+
 .game {
   display: flex;
   flex-direction: row;
@@ -243,7 +245,7 @@ body {
 
 .hamburger-menu {
   position: fixed;
-  transform : translateX(-130%);
+  transform: translateX(-130%);
   z-index: 2;
   width: 100%;
   height: inherit;
@@ -257,7 +259,7 @@ body {
 }
 
 .open {
-  transform : translateX(0);
+  transform: translateX(0);
 }
 
 .menu-list {
@@ -395,7 +397,8 @@ ul {
   margin-left: 20px;
 }
 
-.table-title, .role-name {
+.table-title,
+.role-name {
   font-weight: bold;
 }
 
@@ -438,7 +441,7 @@ figure .figure-img {
   padding-left: calc(var(--bs-gutter-x)* .2);
 }
 
-button.role-name{
+button.role-name {
   background-color: transparent;
   border: 1px solid rgb(169, 169, 169);
   cursor: pointer;
@@ -480,7 +483,9 @@ button.role-name{
   padding-top: 10px;
 }
 
-.tank-container, .dps-container, .heal-container {
+.tank-container,
+.dps-container,
+.heal-container {
   display: none;
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Result = ({result}) => {
+const Result = ({ result }) => {
 	return (
 		<>
 			<div>{result}</div>
