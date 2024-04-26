@@ -1,6 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from '@mui/material';
+import Button from 'react-bootstrap/Button';
 
 const MyButton = ({logic, children, cn}) => {
 	return (
