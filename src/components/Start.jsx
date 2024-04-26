@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react'
-import MyButton from './MyButton'
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
-import { Button } from 'react-bootstrap';
+import { Button } from '@mui/material';
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 
 const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) => {
 
@@ -83,10 +81,13 @@ const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) =>
 						)
 					})}
 				</div>
-				<MyButton logic={gameStart} cn={'start'}>スタート</MyButton>
+				<div className='start-button'>
+					<Button onClick={() => gameStart()} variant='contained'>スタート</Button>
+				</div>
 				<div>
-					<FontAwesomeIcon icon={faCaretRight} />
-					<button className='rule-button' onClick={handleShow}>ルール</button>
+					<div className='rule-button'>
+						<Button onClick={handleShow} variant='text' startIcon={<ArrowForwardIosOutlinedIcon />} size='small'>ルール</Button>
+					</div>
 				</div>
 			</div>
 
@@ -114,7 +115,7 @@ const Start = ({setPlayers, setGameFlag, players, playerName, setPlayerName}) =>
 					各自「予約カード」を裏向きにして、獲得したすべてのカードを合計します。点数が高い人が勝ちです。<br />
 				</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="text" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
