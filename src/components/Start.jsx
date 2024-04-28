@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react'
-import MyButton from './MyButton'
-import { useState, useEffect } from 'react'
-import MyButton from './MyButton'
+import { useState, useEffect } from 'react';
+import MyButton from './MyButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
