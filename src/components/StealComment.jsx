@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StealComment = ({stealComment, steal, turn, playerBoards, stealCard, setPlayerBoards, setStealComment, setStealCard }) => {
+const StealComment = ({ stealComment, steal, turn, playerBoards, stealCard, setPlayerBoards, setStealComment, setStealCard }) => {
 	return (
 		<>
 			<div className='stealComment'>{stealComment}</div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { makeDeck } from "../logic/InitLogic";
-import { draw, changeTurn, burst, steal, finish, countDrawed} from "../logic/Logic";
+import { draw, changeTurn, burst, steal, finish, countDrawed } from "../logic/Logic";
 import Total from "./Total";
 import DrawedsContainer from "./DrawedsContainer";
 import DrawField from "./DrawField";
@@ -12,7 +12,7 @@ import BurstComment from "./BurstComment";
 import ChangeTurnButton from "./ChangeTurnButton";
 import Deck from "./Deck";
 
-const Board = ({players, playerName}) => {
+const Board = ({ players, playerName }) => {
 
 	const [playerBoards, setPlayerBoards] = useState([]);
 	const [deck, setDeck] = useState([0]);
@@ -24,15 +24,15 @@ const Board = ({players, playerName}) => {
 	const [result, setResult] = useState("");
 	const [stealComment, setStealComment] = useState(false);
 	const [stealCard, setStealCard] = useState(0);
-	
+
 	useEffect(() => {
 		makeDeck(setDeck);
-		
+
 		let playersBoardsInit = [];
 		let drawedInit = [];
 		let pointsInit = [];
 		for (let i = 0; i < players; i++) {
-			playersBoardsInit[i] = []; 
+			playersBoardsInit[i] = [];
 			drawedInit[i] = 0;
 			pointsInit[i] = 0;
 		}
@@ -41,7 +41,7 @@ const Board = ({players, playerName}) => {
 		setPoints(pointsInit);
 	}, []);
 
-	useEffect (() => {
+	useEffect(() => {
 		if (deck.length === 0) {
 			setGameset(true);
 			let playerBoardsOrta = playerBoards.slice();
@@ -60,74 +60,74 @@ const Board = ({players, playerName}) => {
 					</button>
 				}
 				{!burstComment && !stealComment && !gameset &&
-					<ChangeTurnButton 
-						changeTurn={changeTurn} 
-						turn={turn} 
-						players={players} 
-						playerBoards={playerBoards} 
-						points={points} 
-						drawed={drawed} 
-						setDrawed={setDrawed} 
-						setPlayerBoards={setPlayerBoards} 
-						setPoints={setPoints} 
+					<ChangeTurnButton
+						changeTurn={changeTurn}
+						turn={turn}
+						players={players}
+						playerBoards={playerBoards}
+						points={points}
+						drawed={drawed}
+						setDrawed={setDrawed}
+						setPlayerBoards={setPlayerBoards}
+						setPoints={setPoints}
 						setTurn={setTurn}
 					/>
 				}
 				{burstComment &&
-					<BurstComment 
-						burst={burst} 
-						playerName={playerName} 
-						turn={turn} 
-						players={players} 
-						playerBoards={playerBoards} 
-						points={points} 
-						drawed={drawed} 
-						setPlayerBoards={setPlayerBoards} 
-						setPoints={setPoints} 
-						setTurn={setTurn} 
-						setBurstComment={setBurstComment} 
-						setDrawed={setDrawed} 
+					<BurstComment
+						burst={burst}
+						playerName={playerName}
+						turn={turn}
+						players={players}
+						playerBoards={playerBoards}
+						points={points}
+						drawed={drawed}
+						setPlayerBoards={setPlayerBoards}
+						setPoints={setPoints}
+						setTurn={setTurn}
+						setBurstComment={setBurstComment}
+						setDrawed={setDrawed}
 						burstComment={burstComment}
 					/>
 				}
 				{stealComment &&
-					<StealComment 
-						stealComment={stealComment} 
-						steal={steal} 
-						turn={turn} 
-						playerBoards={playerBoards} 
-						stealCard={stealCard} 
-						setPlayerBoards={setPlayerBoards} 
-						setStealComment={setStealComment} 
+					<StealComment
+						stealComment={stealComment}
+						steal={steal}
+						turn={turn}
+						playerBoards={playerBoards}
+						stealCard={stealCard}
+						setPlayerBoards={setPlayerBoards}
+						setStealComment={setStealComment}
 						setStealCard={setStealCard}
 					/>
 				}
 				{gameset && !burstComment && !stealComment && !result &&
-					<Finish 
-						finish={finish} 
-						playerName={playerName} 
-						playerBoards={playerBoards} 
+					<Finish
+						finish={finish}
+						playerName={playerName}
+						playerBoards={playerBoards}
 						points={points}
-						players={players} 
-						drawed={drawed} 
-						turn={turn} 
-						setPlayerBoards={setPlayerBoards} 
-						setPoints={setPoints} 
+						players={players}
+						drawed={drawed}
+						turn={turn}
+						setPlayerBoards={setPlayerBoards}
+						setPoints={setPoints}
 						setResult={setResult}
 					/>
 				}
 				{result &&
 					<Result result={result} />
 				}
-				</div>
+			</div>
 			<div className="board">
 				<Deck deck={deck} />
 				{playerBoards.map((playerBoard, index) => {
-					 return (
+					return (
 						<div className='player-board' key={index}>
 							<PlayerName playerName={playerName} index={index} turn={turn} />
 							<div className="card-field">
-								<DrawField drawed={drawed} index={index}/>
+								<DrawField drawed={drawed} index={index} />
 								<div className='drawed-cards-container'>
 									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={1} />
 									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={2} />

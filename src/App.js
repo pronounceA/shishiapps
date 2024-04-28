@@ -36,11 +36,11 @@ function App() {
       </div>
       <div className='pages'>
         <Routes>
-          <Route exact path="/" element={ <Home />} />
-          <Route exact path="/TicTacToe" element={ <TicTacToe /> } /> 
-          <Route exact path="/CollectDaruma" element={ <CollectDaruma />} />
-          <Route exact path="/ow2" element={ <OverWatch />}></Route>
-          <Route exact path="/Test" element={ <Test />}></Route>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/TicTacToe" element={<TicTacToe />} />
+          <Route exact path="/CollectDaruma" element={<CollectDaruma />} />
+          <Route exact path="/ow2" element={<OverWatch />}></Route>
+          <Route exact path="/Test" element={<Test />}></Route>
           <Route path="*" element={<Delete />} />
         </Routes>
       </div>

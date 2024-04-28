@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DrawField = ({drawed, index}) => {
+const DrawField = ({ drawed, index }) => {
 	return (
 		<div className='draw-field'>
 			{drawed[index] !== 0 &&
