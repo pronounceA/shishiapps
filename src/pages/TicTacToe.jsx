@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-function Board({xIsNext, squares, onPlay}) {
+function Board({ xIsNext, squares, onPlay }) {
 
 	function handleClick(i) {
 		if (squares[i] || calculateWinner(squares)) {
@@ -66,7 +66,7 @@ function calculateWinner(squares) {
 	return null;
 }
 
-function Square({value, onSquareClick}) {
+function Square({ value, onSquareClick }) {
 
 	return (
 		<button className="square" onClick={onSquareClick}>{value}</button>

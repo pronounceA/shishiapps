@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Deck = ({deck}) => {
+const Deck = ({ deck }) => {
 	return (
 		<>
 			<div className='deck'>
