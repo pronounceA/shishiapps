@@ -1,6 +1,21 @@
-import React from 'react'
+import * as React from 'react'
+import { BurstCommentType } from '../type/Type'
 
-const BurstComment = ({ burst, playerName, turn, players, playerBoards, points, drawed, setPlayerBoards, setPoints, setTurn, setBurstComment, setDrawed, burstComment }) => {
+const BurstComment: React.FC<BurstCommentType> = ({
+	burst,
+	playerName,
+	turn,
+	players,
+	playerBoards,
+	points,
+	drawed,
+	setPlayerBoards,
+	setPoints,
+	setTurn,
+	setBurstComment,
+	setDrawed,
+	burstComment
+}) => {
 	return (
 		<>
 			<button className='burst-button' onClick={() => burst(playerName, turn, players, playerBoards, points, drawed, setPlayerBoards, setPoints, setTurn, setBurstComment, setDrawed)}>OK</button>
