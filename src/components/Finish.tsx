@@ -1,6 +1,7 @@
 import React from 'react'
+import { FinishComponent } from '../type/Type'
 
-const Finish = ({ finish, playerName, playerBoards, points, players, drawed, turn, setPlayerBoards, setPoints, setResult }) => {
+const Finish: React.FC<FinishComponent> = ({ finish, playerName, playerBoards, points, players, drawed, turn, setPlayerBoards, setPoints, setResult }) => {
 	return (
 		<>
 			<button onClick={() => finish(playerName, playerBoards, points, players, drawed, turn, setPlayerBoards, setPoints, setResult)}>集計</button>

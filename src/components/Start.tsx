@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import MyButton from './MyButton';
+import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,34 +6,39 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
 
-const Start = ({ setPlayers, setGameFlag, players, playerName, setPlayerName }) => {
+const Start: React.FC<{
+	setPlayers: React.Dispatch<React.SetStateAction<number>>,
+	setGameFlag: React.Dispatch<React.SetStateAction<boolean>>,
+	players: number,
+	playerName: string[],
+	setPlayerName: React.Dispatch<React.SetStateAction<string[]>>
+}> = ({ setPlayers, setGameFlag, players, playerName, setPlayerName }) => {
 
-	const [nameBrank, setNameBrank] = useState("");
-	const [show, setShow] = useState(false);
+	const [nameBrank, setNameBrank] = React.useState<string>('');
+	const [show, setShow] = React.useState<boolean>(false);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleClose = (): void => setShow(false);
+	const handleShow = (): void => setShow(true);
 
-	const changePlayers = (players) => {
-		setPlayers(players);
-		console.log(`players=${players}`);
+	const changePlayers = (players: string): void => {
+		setPlayers(parseInt(players));
 	}
 
-	const gameStart = () => {
+	const gameStart = (): void => {
 		for (let i = 0; i < players; i++) {
-			if (playerName[i] === "") {
-				setNameBrank("名前がブランクのプレイヤーがいます。")
+			if (playerName[i] === '') {
+				setNameBrank('名前がブランクのプレイヤーがいます。')
 				return;
 			}
 			if (playerName[i].length > 20) {
-				setNameBrank("名前が20文字以上のプレイヤーがいます。")
+				setNameBrank('名前が20文字以上のプレイヤーがいます。')
 				return;
 			}
 		}
 		setGameFlag(true);
 	}
 
-	const changedName = (i, val) => {
+	const changedName = (i: number, val: string): void => {
 		playerName[i] = val;
 		setPlayerName(playerName);
 		// console.log(`i= ${i}`);
@@ -42,10 +46,10 @@ const Start = ({ setPlayers, setGameFlag, players, playerName, setPlayerName }) 
 		// console.log(playerName);
 	}
 
-	useEffect(() => {
-		const newPlayers = [];
+	React.useEffect(() => {
+		const newPlayers: string[] = [];
 		for (let i = 0; i < players; i++) {
-			newPlayers[i] = "";
+			newPlayers[i] = '';
 		}
 		// console.log(newPlayers);
 		setPlayerName(newPlayers);
@@ -56,12 +60,12 @@ const Start = ({ setPlayers, setGameFlag, players, playerName, setPlayerName }) 
 			<div className='start-detail'>
 				{nameBrank &&
 					(
-						<Alert variant="danger">
+						<Alert variant='danger'>
 							{nameBrank}
 						</Alert>
 					)
 				}
-				<div className="player-num">
+				<div className='player-num'>
 					<div>プレイヤー数：</div>
 					<div>
 						<select onChange={(e) => changePlayers(e.target.value)}>
@@ -71,19 +75,19 @@ const Start = ({ setPlayers, setGameFlag, players, playerName, setPlayerName }) 
 						</select>
 					</div>
 				</div>
-				<div className="players-name">
-					{playerName.map((name, i) => {
+				<div className='players-name'>
+					{playerName.map((name: string, i: number) => {
 						return (
-							<div className="player">
+							<div className='player'>
 								<div>
 									プレイヤー{i + 1}：
 								</div>
-								<input type="text" id={i} onChange={(e) => changedName(e.target.id, e.target.value)} />
+								<input type='text' id={i.toString()} onChange={(e) => changedName(parseInt(e.target.id), e.target.value)} />
 							</div>
 						)
 					})}
 				</div>
-				<MyButton logic={gameStart} cn={'start'}>スタート</MyButton>
+				<button onClick={() => gameStart()}>スタート</button>
 				<div>
 					<FontAwesomeIcon icon={faCaretRight} />
 					<button className='rule-button' onClick={handleShow}>ルール</button>
@@ -114,7 +118,7 @@ const Start = ({ setPlayers, setGameFlag, players, playerName, setPlayerName }) 
 					各自「予約カード」を裏向きにして、獲得したすべてのカードを合計します。点数が高い人が勝ちです。<br />
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
+					<Button variant='secondary' onClick={handleClose}>
 						Close
 					</Button>
 				</Modal.Footer>

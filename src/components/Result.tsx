@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Result = ({ result }) => {
+const Result: React.FC<{ result: string }> = ({ result }) => {
 	return (
 		<>
 			<div>{result}</div>
