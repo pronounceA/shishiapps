@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DrawField = ({ drawed, index }) => {
+const DrawField: React.FC<{ drawed: number[], index: number }> = ({ drawed, index }) => {
 	return (
 		<div className='draw-field'>
 			{drawed[index] !== 0 &&

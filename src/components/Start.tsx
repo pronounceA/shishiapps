@@ -38,7 +38,7 @@ const Start: React.FC<{
 		setGameFlag(true);
 	}
 
-	const changedName = (i: string, val: string): void => {
+	const changedName = (i: number, val: string): void => {
 		playerName[i] = val;
 		setPlayerName(playerName);
 		// console.log(`i= ${i}`);
@@ -82,7 +82,7 @@ const Start: React.FC<{
 								<div>
 									プレイヤー{i + 1}：
 								</div>
-								<input type='text' id={i.toString()} onChange={(e) => changedName(e.target.id, e.target.value)} />
+								<input type='text' id={i.toString()} onChange={(e) => changedName(parseInt(e.target.id), e.target.value)} />
 							</div>
 						)
 					})}

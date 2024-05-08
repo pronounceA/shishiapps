@@ -1,3 +1,4 @@
+
 export type PlayerBoardsType = PlayerBoardType[];
 
 export type PlayerBoardType = number[];
@@ -101,3 +102,45 @@ export type CountDrawedType = (
 	num: number
 ) => string;
 
+export type ChangeTurnButtonType = {
+	changeTurn: ChangeTurnType,
+	turn: number,
+	players: number,
+	playerBoards: PlayerBoardsType,
+	points: number[],
+	drawed: number[],
+	setDrawed: React.Dispatch<React.SetStateAction<number[]>>,
+	setPlayerBoards: React.Dispatch<React.SetStateAction<PlayerBoardsType>>,
+	setPoints: React.Dispatch<React.SetStateAction<number[]>>,
+	setTurn: React.Dispatch<React.SetStateAction<number>>
+}
+
+export type DrawedsContainerType = {
+	playerBoard: PlayerBoardType,
+	countDrawed: CountDrawedType,
+	index: number
+}
+
+export type FinishComponent = {
+	finish: FinishType,
+	playerName: string[],
+	playerBoards: PlayerBoardsType,
+	points: number[],
+	players: number,
+	drawed: number[],
+	turn: number,
+	setPlayerBoards: React.Dispatch<React.SetStateAction<PlayerBoardsType>>,
+	setPoints: React.Dispatch<React.SetStateAction<number[]>>,
+	setResult: React.Dispatch<React.SetStateAction<string>>
+}
+
+export type StealCommentComponent = {
+	stealComment: string,
+	steal: StealType,
+	turn: number,
+	playerBoards: PlayerBoardsType,
+	stealCard: number,
+	setPlayerBoards: React.Dispatch<React.SetStateAction<PlayerBoardsType>>,
+	setStealComment: React.Dispatch<React.SetStateAction<string>>,
+	setStealCard: React.Dispatch<React.SetStateAction<number>>
+}

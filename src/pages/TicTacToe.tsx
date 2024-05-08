@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import * as React from 'react';
 
-function Board({ xIsNext, squares, onPlay }) {
+const Board: React.FC<{
+	xIsNext: boolean,
+	squares: string[] | null,
+	onPlay: (sq: string[]) => void
+}> = ({ xIsNext, squares, onPlay }) => {
 
-	function handleClick(i) {
-		if (squares[i] || calculateWinner(squares)) {
+	const handleClick = (i: number): void => {
+		if (squares![i] || calculateWinner(squares!)) {
 			return;
 		}
-		const nextSquares = squares.slice();
+		const nextSquares: string[] = squares!.slice();
 		if (xIsNext) {
 			nextSquares[i] = "X";
 		} else {
@@ -15,8 +19,9 @@ function Board({ xIsNext, squares, onPlay }) {
 		onPlay(nextSquares);
 	}
 
-	const winner = calculateWinner(squares);
+	const winner: string | null = calculateWinner(squares!);
 	let status;
+
 	if (winner) {
 		status = "Winner: " + winner;
 	} else {
@@ -27,26 +32,26 @@ function Board({ xIsNext, squares, onPlay }) {
 		<>
 			<div className="status">{status}</div>
 			<div className="board-row">
-				<Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-				<Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-				<Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+				<Square value={squares![0]} onSquareClick={() => handleClick(0)} />
+				<Square value={squares![1]} onSquareClick={() => handleClick(1)} />
+				<Square value={squares![2]} onSquareClick={() => handleClick(2)} />
 			</div>
 			<div className="board-row">
-				<Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-				<Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-				<Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+				<Square value={squares![3]} onSquareClick={() => handleClick(3)} />
+				<Square value={squares![4]} onSquareClick={() => handleClick(4)} />
+				<Square value={squares![5]} onSquareClick={() => handleClick(5)} />
 			</div>
 			<div className="board-row">
-				<Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-				<Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-				<Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+				<Square value={squares![6]} onSquareClick={() => handleClick(6)} />
+				<Square value={squares![7]} onSquareClick={() => handleClick(7)} />
+				<Square value={squares![8]} onSquareClick={() => handleClick(8)} />
 			</div>
 		</>
 	)
 }
 
-function calculateWinner(squares) {
-	const lines = [
+const calculateWinner = (squares: string[]): string | null => {
+	const lines: number[][] = [
 		[0, 1, 2],
 		[3, 4, 5],
 		[6, 7, 8],
@@ -66,33 +71,38 @@ function calculateWinner(squares) {
 	return null;
 }
 
-function Square({ value, onSquareClick }) {
+const Square: React.FC<{
+	value: string,
+	onSquareClick: () => void
+}> = ({ value, onSquareClick }) => {
 
 	return (
 		<button className="square" onClick={onSquareClick}>{value}</button>
 	);
 }
 
-export default function Game() {
-	const [xIsNext, setXIsNext] = useState(true);
-	const [history, setHistory] = useState([Array(9).fill(null)]);
-	const [currentMove, setCurrentMove] = useState(0);
-	const currentSquares = history[currentMove];
+const Game: React.FC = () => {
+	const [xIsNext, setXIsNext] = React.useState<boolean>(true);
+	const [history, setHistory] = React.useState<(string[] | null)[]>([Array(9).fill(null)]);
+	const [currentMove, setCurrentMove] = React.useState<number>(0);
 
-	function handlePlay(nextSquares) {
-		const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+	const currentSquares: string[] | null = history[currentMove];
+
+	const handlePlay = (nextSquares: string[]): void => {
+		const nextHistory: (string[] | null)[] = [...history.slice(0, currentMove + 1), nextSquares];
 		setHistory(nextHistory);
 		setCurrentMove(nextHistory.length - 1);
 		setXIsNext(!xIsNext);
 	}
 
-	function jumpTo(nextMove) {
+	const jumpTo = (nextMove: number): void => {
 		setCurrentMove(nextMove);
 		setXIsNext(nextMove % 2 === 0);
 	}
 
-	const moves = history.map((squares, move) => {
+	const moves: React.JSX.Element[] = history.map((squares: string[] | null, move: number) => {
 		let description;
+
 		if (move > 0) {
 			description = 'Go to move#' + move;
 		} else {
@@ -116,3 +126,5 @@ export default function Game() {
 		</div>
 	);
 }
+
+export default Game;

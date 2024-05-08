@@ -1,7 +1,8 @@
 import React from 'react'
+import { DrawedsContainerType } from '../type/Type'
 
 
-const DrawedsContainer = ({ playerBoard, countDrawed, index }) => {
+const DrawedsContainer: React.FC<DrawedsContainerType> = ({ playerBoard, countDrawed, index }) => {
 	return (
 		<>
 			{playerBoard.includes(index) &&
