@@ -11,22 +11,14 @@ const Board: React.FC<{
 			return;
 		}
 		const nextSquares: string[] = squares!.slice();
-		if (xIsNext) {
-			nextSquares[i] = "X";
-		} else {
-			nextSquares[i] = "O";
-		}
+		nextSquares[i] = xIsNext ? "X" : "O";
 		onPlay(nextSquares);
 	}
 
 	const winner: string | null = calculateWinner(squares!);
 	let status;
 
-	if (winner) {
-		status = "Winner: " + winner;
-	} else {
-		status = "Next player: " + (xIsNext ? "X" : "O");
-	}
+	status = winner ? "Winner: " + winner : "Next player: " + (xIsNext ? "X" : "O");
 
 	return (
 		<>
@@ -103,11 +95,8 @@ const Game: React.FC = () => {
 	const moves: React.JSX.Element[] = history.map((squares: string[] | null, move: number) => {
 		let description;
 
-		if (move > 0) {
-			description = 'Go to move#' + move;
-		} else {
-			description = 'Go to game start';
-		}
+		description = move > 0 ? 'Go to move#' + move : 'Go to game start';
+
 		return (
 			<li key={move}>
 				<button onClick={() => jumpTo(move)}>{description}</button>
