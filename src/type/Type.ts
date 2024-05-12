@@ -1,4 +1,3 @@
-
 export type PlayerBoardsType = PlayerBoardType[];
 
 export type PlayerBoardType = number[];

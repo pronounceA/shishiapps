@@ -321,9 +321,7 @@ export const countDrawed: CountDrawedType = (playerBoard, num) => {
 	let count: number = 0;
 
 	for (let card of playerBoard) {
-		if (num === card) {
-			count++;
-		}
+		num === card ? count++ : '';
 	}
 
 	return '×' + count;
