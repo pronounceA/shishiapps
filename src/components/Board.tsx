@@ -1,36 +1,43 @@
-import { useState, useEffect } from "react";
-import { makeDeck } from "../logic/InitLogic";
-import { draw, changeTurn, burst, steal, finish, countDrawed } from "../logic/Logic";
-import Total from "./Total";
-import DrawedsContainer from "./DrawedsContainer";
-import DrawField from "./DrawField";
-import PlayerName from "./PlayerName";
-import Result from "./Result";
-import Finish from "./Finish";
-import StealComment from "./StealComment";
-import BurstComment from "./BurstComment";
-import ChangeTurnButton from "./ChangeTurnButton";
-import Deck from "./Deck";
+import * as React from 'react';
+import { makeDeck } from '../logic/InitLogic';
+import { draw, changeTurn, burst, steal, finish, countDrawed } from '../logic/Logic';
+import Total from './Total';
+import DrawedsContainer from './DrawedsContainer';
+import DrawField from './DrawField';
+import PlayerName from './PlayerName';
+import Result from './Result';
+import Finish from './Finish';
+import StealComment from './StealComment';
+import BurstComment from './BurstComment';
+import ChangeTurnButton from './ChangeTurnButton';
+import Deck from './Deck';
+import {
+	PlayerBoardsType,
+} from '../type/Type';
 
-const Board = ({ players, playerName }) => {
 
-	const [playerBoards, setPlayerBoards] = useState([]);
-	const [deck, setDeck] = useState([0]);
-	const [drawed, setDrawed] = useState([]);
-	const [turn, setTurn] = useState(0);
-	const [points, setPoints] = useState([]);
-	const [burstComment, setBurstComment] = useState("");
-	const [gameset, setGameset] = useState(false);
-	const [result, setResult] = useState("");
-	const [stealComment, setStealComment] = useState(false);
-	const [stealCard, setStealCard] = useState(0);
+const Board: React.FC<{
+	players: number;
+	playerName: string[];
+}> = ({ players, playerName }) => {
 
-	useEffect(() => {
+	const [playerBoards, setPlayerBoards] = React.useState<number[][]>([]);
+	const [deck, setDeck] = React.useState<number[]>([0]);
+	const [drawed, setDrawed] = React.useState<number[]>([]);
+	const [turn, setTurn] = React.useState<number>(0);
+	const [points, setPoints] = React.useState<number[]>([]);
+	const [burstComment, setBurstComment] = React.useState<string>('');
+	const [gameset, setGameset] = React.useState<boolean>(false);
+	const [result, setResult] = React.useState<string>('');
+	const [stealComment, setStealComment] = React.useState<string>('');
+	const [stealCard, setStealCard] = React.useState<number>(0);
+
+	React.useEffect(() => {
 		makeDeck(setDeck);
 
-		let playersBoardsInit = [];
-		let drawedInit = [];
-		let pointsInit = [];
+		const playersBoardsInit: PlayerBoardsType = [];
+		const drawedInit: number[] = [];
+		const pointsInit: number[] = [];
 		for (let i = 0; i < players; i++) {
 			playersBoardsInit[i] = [];
 			drawedInit[i] = 0;
@@ -41,10 +48,10 @@ const Board = ({ players, playerName }) => {
 		setPoints(pointsInit);
 	}, []);
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if (deck.length === 0) {
 			setGameset(true);
-			let playerBoardsOrta = playerBoards.slice();
+			const playerBoardsOrta: PlayerBoardsType = playerBoards.slice();
 			playerBoardsOrta[turn].push(drawed[turn]);
 			playerBoardsOrta[turn] = playerBoardsOrta[turn].sort((a, b) => a - b);
 			setDrawed([]);
@@ -120,13 +127,13 @@ const Board = ({ players, playerName }) => {
 					<Result result={result} />
 				}
 			</div>
-			<div className="board">
+			<div className='board'>
 				<Deck deck={deck} />
 				{playerBoards.map((playerBoard, index) => {
 					return (
 						<div className='player-board' key={index}>
 							<PlayerName playerName={playerName} index={index} turn={turn} />
-							<div className="card-field">
+							<div className='card-field'>
 								<DrawField drawed={drawed} index={index} />
 								<div className='drawed-cards-container'>
 									<DrawedsContainer playerBoard={playerBoard} countDrawed={countDrawed} index={1} />

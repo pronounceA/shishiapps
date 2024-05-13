@@ -1,6 +1,16 @@
 import React from 'react'
+import { StealCommentComponent } from '../type/Type'
 
-const StealComment = ({ stealComment, steal, turn, playerBoards, stealCard, setPlayerBoards, setStealComment, setStealCard }) => {
+const StealComment: React.FC<StealCommentComponent> = ({
+	stealComment,
+	steal,
+	turn,
+	playerBoards,
+	stealCard,
+	setPlayerBoards,
+	setStealComment,
+	setStealCard
+}) => {
 	return (
 		<>
 			<div className='stealComment'>{stealComment}</div>

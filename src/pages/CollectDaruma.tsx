@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import * as React from 'react';
 import Start from '../components/Start'
 import Board from '../components/Board'
 
 const CollectDaruma = () => {
-	const [players, setPlayers] = useState(2);
-	const [playerName, setPlayerName] = useState([]);
-	const [gameFlag, setGameFlag] = useState(false);
+	const [players, setPlayers] = React.useState<number>(2);
+	const [playerName, setPlayerName] = React.useState<string[]>([]);
+	const [gameFlag, setGameFlag] = React.useState<boolean>(false);
 
 	/*
 	/

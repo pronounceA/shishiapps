@@ -1,4 +1,4 @@
-const Total = ({ points, index }) => {
+const Total: React.FC<{ points: number[], index: number }> = ({ points, index }) => {
 
 	return (
 		<div className='total'>
